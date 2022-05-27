@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="John Aziz" />
+        <title>Arram | Dashboard</title>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="/static/css/styles.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <link rel="shortcut icon" href="/static/ico/favicon.png">
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              overflow-y:scroll;
+              width: 100%;
+              table-layout:fixed;
+            }
+            
+            td, th {
+              border: 1px solid #000;
+              text-align: center;
+              padding: 8px;
+            }
+            th {
+                color: white;
+                background-color: #948A54;
+            }
+            .text-responsive {
+                font-size: calc(1% + 0.5vw + 0.7vh);
+            }
+            </style>
+    </head>
+    <body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="/teamlead/dashboard">Arram Group</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            </div>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/employee/{{ data.id }}">Account</a></li>
+                        <li><a class="dropdown-item" href="/settings/{{ data.id }}">Settings</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Menu</div>
+                            <a class="nav-link" href="/teamlead/dashboard">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                Pages
+                                <div class="sb-sidenav-collapse-arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                        Leads
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/leads/{{ data.id }}">View Leads</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                        Deals
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/deals/{{ data.id }}">View Deals</a>
+                                        </nav>
+                                    </div>
+                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#dailyReport" aria-expanded="false" aria-controls="dailyReport">
+                                        Daily Report
+                                        <div class="sb-sidenav-collapse-arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </div>
+                                    </a>
+                                    <div class="collapse" id="dailyReport" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/add-report/{{ data.id }}">Add a Report</a>
+                                        </nav>
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/reports/view/{{ data.id }}">View My Reports</a>
+                                        </nav>
+                                        <nav class="sb-sidenav-menu-nested nav">
+                                            <a class="nav-link" href="/teamlead/reports/view/{{ data.id }}">View Team Reports</a>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="sb-sidenav-menu-heading">User</div>
+                            <a class="nav-link" href="/employee/{{ data.id }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                                Account
+                            </a>
+                            <a class="nav-link" href="/settings/{{ data.id }}">
+                                <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
+                                Settings
+                            </a>
+                            <a class="nav-link" href="/leads/help">
+                                <div class="sb-nav-link-icon"><i class="fas fa-info"></i></div>
+                                Help
+                            </a>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Daily Report</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item">Employee</li>
+                            <li class="breadcrumb-item active">Daily Report</li>
+                        </ol>
+										<div class="card">
+											<div class="card-body">
+							                    <form id="form" method="POST" action="/add-report/{{ data.id }}">
+                                                    <table>
+                                                        <thead>
+                                                            <th colspan="3">Calls And Chats</th>
+                                                            <th colspan="3">Post And Share</th>
+                                                            <th colspan="2">Orientations</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="text-responsive">National Calls</th>
+                                                                <th class="text-responsive">International Calls</th>
+                                                                <th class="text-responsive">Chats</th>
+                                                                <th class="text-responsive">New Developer</th>
+                                                                <th class="text-responsive">Availability</th>
+                                                                <th class="text-responsive">Hot Deals</th>
+                                                                <th class="text-responsive">New</th>
+                                                                <th class="text-responsive">Done</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>40 To 60</td>
+                                                                <td>2 To 5</td>
+                                                                <td>
+                                                                    <input type="number" min="0" id="chats" name="chats" class="form-control" placeholder="chats">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" min="0" id="new_developer" name="new_developer" class="form-control" placeholder="new developer">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" min="0" id="availability" name="availability" class="form-control" placeholder="availability">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" min="0" id="hot_deals" name="hot_deals" class="form-control" placeholder="hot deals">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" min="0" id="new" name="new" class="form-control" placeholder="new">
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" min="0" id="done" name="done" class="form-control" placeholder="done">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="3">Check An Availability</th>
+                                                                <td>
+                                                                    <input type="checkbox" id="checkbox" name="check_an_availability" class="form-check-input">
+                                                                </td>
+                                                                <th colspan="3">Check Todays' Tasks</th>
+                                                                <td>
+                                                                    <input type="checkbox" id="checkbox" name="check_today_tasks" class="form-check-input">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="3">Check Hot Deals</th>
+                                                                <td>
+                                                                    <input type="checkbox" id="checkbox" name="check_hot_deals" class="form-check-input">
+                                                                </td>
+                                                                <th colspan="3">Highlight Immediate Tasks</th>
+                                                                <td>
+                                                                    <input type="checkbox" id="checkbox" name="highlight_immediate_tasks" class="form-check-input">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="3">Share Stories</th>
+                                                                <td>
+                                                                    <input type="checkbox" id="checkbox" name="share_stories" class="form-check-input">
+                                                                </td>
+                                                                <th colspan="3">Workshop</th>
+                                                                <td>
+                                                                    <input type="checkbox" id="checkbox" name="workshop" class="form-check-input">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="8" style="background-color: #C4BD97; color:white;"><h1 style="font-weight: bold;">BREAK</h1></th>
+                                                            </tr>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="8">11:00 AM To 1:00 PM</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="8">
+                                                                    <textarea id="first_period" name="first_period" form="form" class="form-control"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="8">1:30 PM To 3:30 PM</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="8">
+                                                                    <textarea id="second_period" name="second_period" form="form" class="form-control"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th colspan="8">4:00 PM To 6:00 PM</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="8">
+                                                                    <textarea id="third_period" name="third_period" form="form" class="form-control"></textarea>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                        <div class="mb-2 mt-2 align-items-center">
+                                                            <input type="submit" class="btn btn-primary float-start px-5" value="Submit">
+                                                            <a class="btn btn-danger float-end px-3" href="javascript:history.back()">Cancel</a>
+                                                        </div>
+							                    </form>
+						                    </div>
+                                        </div>
+                                    </div>
+                                </main>
+                            </div>
+                        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/static/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <script src="/static/js/datatables-simple-demo.js"></script>
+    </body>
+</html>
+

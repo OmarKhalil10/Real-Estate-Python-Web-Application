@@ -1,0 +1,38 @@
+nav .als{
+    text-align: start!important;
+}
+nav .ale{
+    text-align: end!important;
+}
+#navbar {
+    overflow: hidden;
+    background-color: #333;
+    z-index: 100;
+  }
+  .bi{
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+}
+.sticky {
+    position: fixed!important;
+    top: 0;
+    width: 100%;
+}
+
+@media (max-width:445px){
+    nav .als {
+        text-align: center!important;
+    }
+    nav .ale {
+        text-align: center!important;
+    }
+    
+}
+
+@media (min-width:730px){
+    #wrapper {
+         display: flex;
+     }
+ }
+ 
